@@ -1,0 +1,25 @@
+versino:'3.8'
+
+services:
+  db:
+    #最新バージョンのmysqlコンテナイメージをベースイメージとする。
+    image: mysql:latest
+
+    #dockerデーモンとOSホストの再起動時にコンテナも再起動する
+    restart: always
+
+    #環境ファイルでパスワード等を設定する。
+    environment: ./.env_file
+
+    #ホストOSのport3314番とコンテナのport3306番をマッピングする。
+    ports:
+      -"3314:3306"
+
+    #上から順に
+    #初期テーブル作成、初期データ投入。
+    #データをコンテナ外部にマウントして永続化する。
+    #ログデータをコンテナ外部にマウントして永続化する。
+    volumes:
+     - ./setting/schema.sql: /docker-entrypoint-initdb.d
+     - ./data: /var/lib/mysql
+     - ./logs: /var/log/mysql  
