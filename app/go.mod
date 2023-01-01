@@ -1,5 +1,3 @@
-module github.com/Babarin0512/SuggestMenuApp
+module github.com/Babarin0512/SuggestMenuApp/tree/main/app
 
 go 1.19
-
-require github.com/go-sql-driver/mysql v1.7.0 // indirect
